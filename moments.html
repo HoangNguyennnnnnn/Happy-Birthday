@@ -1,0 +1,258 @@
+
+
+<!-- FILE: moments.html -->
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>✨ Khoảnh khắc xinh đẹp của bé</title>
+  <style>
+    :root{ --accent:#ff6b9a; --muted:#fbeff4; --card:#fff; --shadow:0 8px 30px rgba(0,0,0,0.08);} 
+    *{box-sizing:border-box}
+    body{ margin:0; font-family: "Segoe UI", Roboto, Arial; background: linear-gradient(180deg,#fff7fb,#fffafc); color:#222; padding:28px 18px 60px; }
+    header{ position:sticky; top:12px; z-index:30; display:flex; align-items:center; justify-content:space-between; gap:12px; max-width:1200px; margin:0 auto 18px; padding:10px 14px; background: linear-gradient(180deg, rgba(255,255,255,0.7), rgba(255,255,255,0.45)); border-radius:12px; box-shadow:0 8px 28px rgba(0,0,0,0.04); backdrop-filter: blur(6px); }
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{ width:44px; height:44px; border-radius:10px; background:linear-gradient(90deg,var(--accent),#ffb3cc); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:800; }
+    .title{font-weight:800; color:var(--accent)}
+    .nav-actions{display:flex; gap:8px; align-items:center}
+    .nav-actions a, .nav-actions button, .nav-actions label{ padding:8px 10px; border-radius:9px; border:none; cursor:pointer; text-decoration:none; background:#fff; color:var(--accent); box-shadow:0 6px 18px rgba(0,0,0,0.04); font-weight:700; }
+    .nav-actions a.active{ background:linear-gradient(90deg,var(--accent),#ff8fb5); color:#fff; }
+
+    .hero{ max-width:1100px; margin:8px auto 18px; text-align:center; padding:20px; background:var(--muted); border-radius:14px; box-shadow:var(--shadow);} 
+    .hero h1{ margin:0 0 8px; color:var(--accent);} .hero p{ margin:0; color:#555; }
+
+    .gallery{ max-width:1100px; margin:20px auto 40px; display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap:18px; }
+    .photo{ background:var(--card); border-radius:14px; overflow:hidden; box-shadow:0 8px 24px rgba(0,0,0,0.06); cursor:pointer; }
+    .photo img{ width:100%; height:220px; object-fit:cover; display:block; }
+    .photo .cap{ padding:10px 12px; font-size:0.95rem; color:#555; }
+
+    /* Lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.65);
+  z-index: 80;
+  animation: fadeIn 0.3s ease;
+}
+
+.lightbox.open {
+  display: flex;
+}
+
+.lightbox > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  animation: zoomIn 0.3s ease;
+}
+
+.lightbox img {
+  max-width: 45%;      /* ↓ giảm từ 60% xuống 45% */
+  max-height: 45%;     /* ↓ giảm từ 60% xuống 45% */
+  margin-bottom: 20px;
+  border: 5px solid rgba(255, 255, 255, 0.85);
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  transition: transform 0.25s ease;
+}
+
+.lightbox .caption {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  max-width: 80%;
+  background: rgba(0, 0, 0, 0.55);
+  padding: 14px 20px;
+  border-radius: 14px;
+  color: #fff;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .lightbox img {
+    max-width: 80%;    /* ảnh nhỏ hơn cho mobile */
+    max-height: 45%;
+  }
+
+  .lightbox .caption {
+    font-size: 0.95rem;
+    max-width: 90%;
+    padding: 12px 16px;
+  }
+}
+
+/* Hiệu ứng */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+
+    footer{ text-align:center; color:#777; margin-top:18px; font-size:13px; max-width:1100px; margin-left:auto; margin-right:auto; }
+
+    @media (max-width:420px){ .hero{ padding:14px } .photo img{ height:160px } }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand">
+      <div class="logo">❤</div>
+      <div>
+        <div class="title">Love Journey</div>
+        <div style="font-size:12px; color:#666">Khoảnh khắc xinh đẹp của bé</div>
+      </div>
+    </div>
+
+    <div class="nav-actions">
+      <a href="index.html" title="Về trang chủ">Trang chủ</a>
+      <a href="moments.html" title="Khoảnh khắc" class="active">Khoảnh khắc xinh đẹp</a>
+      <a href="letter.html" title="Lời chúc">Lời chúc nè :3</a>
+      <label style="margin:0 6px; font-size:13px;">
+        <input type="checkbox" id="openNewTabMoments" /> Mở chi tiết ở tab mới
+      </label>
+    </div>
+  </header>
+
+  <main>
+    <iframe src="audio.html" allow="autoplay" style="display:none"></iframe>
+
+    <section class="hero">
+      <h1>✨ Khoảnh khắc xinh đẹp của bé ✨</h1>
+      <p>Những nụ cười, cái nhìn tò mò, đôi tay bé xíu — mỗi tấm ảnh là một câu chuyện nhỏ anh muốn giữ lại.</p>
+    </section>
+
+    <section class="gallery" id="gallery">
+      <div class="photo" data-caption="Rạng rỡ quá nè :3">
+        <img src="moments/img/moment1.jpg" alt="Rạng rỡ quá nè :3">
+        <div class="cap">Rạng rỡ quá nè :3</div>
+      </div>
+
+      <div class="photo" data-caption="Ai mà không yêu nụ cười này chứ?">
+        <img src="moments/img/moment2.jpg" alt="Ai mà không yêu nụ cười này chứ?">
+        <div class="cap">Ai mà không yêu nụ cười này chứ?</div>
+      </div>
+
+      <div class="photo" data-caption="Mê quá trờiii :3">
+        <img src="moments/img/moment3.jpg" alt="Mê quá trờiii :3">
+        <div class="cap">Mê quá trờiii :3</div>
+      </div>
+
+      <div class="photo" data-caption="Nàng thơ của ai zậyy :3">
+        <img src="moments/img/moment4.jpg" alt="Nàng thơ của ai zậyy :3">
+        <div class="cap">Nàng thơ của ai zậyy :3</div>
+      </div>
+
+      <div class="photo" data-caption="Đi biển oceann :D">
+        <img src="moments/img/moment5.jpg" alt="Đi biển oceann :D">
+        <div class="cap">Đi biển oceann :D</div>
+      </div>
+
+      <div class="photo" data-caption="Ngất xỉuuu XD">
+        <img src="moments/img/moment6.jpg" alt="Ngất xỉuuu XD">
+        <div class="cap">Ngất xỉuuu XD</div>
+      </div>
+      <div class="photo" data-caption="Công chúa :3">
+        <img src="moments/img/moment7.jpg" alt="Công chúa :3">
+        <div class="cap">Công chúa :3</div>
+      </div>
+      <div class="photo" data-caption="Giật capcut vs ảnh tui :3">
+        <img src="moments/img/moment8.jpg" alt="Giật capcut vs ảnh tui :3">
+        <div class="cap">Giật capcut vs ảnh tui :3</div>
+      </div>
+
+    </section>
+
+    <!-- lightbox overlay -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+      <div style="text-align:center">
+        <img id="lightboxImg" src="" alt="" />
+        <div class="caption" id="lightboxCaption"></div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+   Love Journey • Created with ❤️
+  </footer>
+<script>
+  // open-in-new-tab toggle for moments page
+  const toggle = document.getElementById('openNewTabMoments');
+  toggle && toggle.addEventListener('change', (e)=>{
+    const cards = document.querySelectorAll('.gallery .photo');
+    cards.forEach(c=>{
+      if(e.target.checked){
+        c.addEventListener('dblclick', openImageInNewTab);
+      } else {
+        c.removeEventListener('dblclick', openImageInNewTab);
+      }
+    });
+  });
+
+  function openImageInNewTab(e){
+    const img = this.querySelector('img');
+    if(img && img.src) window.open(img.src, '_blank');
+  }
+
+  // --- Lời nhắn cho từng ảnh ---
+  const messages = {
+    "moment1.jpg": "🌸 Ỏoooo mê quá vẻ đẹp nàyyy :3",
+    "moment2.jpg": "💕 Tự tin nha mình nhaaa. Yêu mìnhh :3",
+    "moment3.jpg": "🌊 Người đẹp mê hồn :3",
+    "moment4.jpg": "🌈 Nàng thơ nè :3",
+    "moment5.jpg": "🏖️ Nàng tiên cá của tuiii",
+    "moment6.jpg": "😵‍💫 Ngất xỉu mất thôiiiii :3",
+    "moment7.jpg": "😍 Người tuyển phò mã khônggg :3",
+    "moment8.jpg": "💖 Nhớ ai hả mìnhhh :3"
+  };
+
+  // --- Lightbox behavior (ảnh + lời nhắn) ---
+  const gallery = document.getElementById('gallery');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxCaption = document.getElementById('lightboxCaption');
+
+  gallery.addEventListener('click', (e)=>{
+    const photo = e.target.closest('.photo');
+    if(!photo) return;
+    const img = photo.querySelector('img');
+    const src = img.src;
+    const fileName = src.split('/').pop(); // Lấy tên file ảnh
+    const message = messages[fileName] || photo.dataset.caption || '';
+    lightboxImg.src = src;
+    lightboxImg.alt = img.alt || '';
+    lightboxCaption.textContent = message;
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  });
+
+  lightbox.addEventListener('click', (e)=>{
+    if(e.target === lightbox || e.target === lightboxImg) {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+
+  window.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape') {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Kỷ niệm 3 — PTB với nhóm</title>
+<style>
+  body {
+    margin: 0;
+    font-family: "Segoe UI", Arial;
+    background: linear-gradient(180deg, #fffaf0, #fff7f8);
+    color: #222;
+  }
+
+  .wrap {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 20px;
+  }
+
+  h1 {
+    color: #ff3c78;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  p {
+    text-align: center;
+    color: #444;
+  }
+
+  /* Lưới 3 hàng — video ở giữa */
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 20px;
+  }
+
+  .item {
+    position: relative;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    background: #fff;
+  }
+
+  /* Ảnh ngang */
+  .horizontal img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Ảnh dọc */
+  .vertical img {
+    width: 100%;
+    height: 340px;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Video dọc — nằm giữa */
+  .video-vertical {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+  }
+  .video-vertical video {
+    width: 100%;
+    height: 480px;
+    object-fit: cover;
+    display: block;
+    border: none;
+    border-radius: 14px;
+  }
+
+  /* Responsive: về 1 cột khi màn nhỏ */
+  @media (max-width: 768px) {
+    .gallery {
+      grid-template-columns: 1fr;
+    }
+    .video-vertical {
+      grid-column: auto;
+      grid-row: auto;
+    }
+  }
+
+  .nav {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 10px 16px;
+    background: #ff3c78;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+  <iframe src="audio.html" allow="autoplay" style="display:none"></iframe>
+
+  <div class="wrap">
+    <h1>Kỷ niệm 3 — Đi PTB với nhóm</h1>
+    <p>Zụng trộm không thể giấu hả :33
+    </p>
+
+    <div class="gallery">
+      <!-- Hàng trên -->
+      <div class="item horizontal"><img src="public/img/ptb_h1.jpg" alt=""></div>
+      <div class="item horizontal"><img src="public/img/ptb_h2.jpg" alt=""></div>
+      <div class="item horizontal"><img src="public/img/ptb_h3.jpg" alt=""></div>
+
+      <!-- Hàng giữa có video ở giữa -->
+      <div class="item vertical"><img src="public/img/ptb_vertical1.jpg" alt=""></div>
+      <div class="item video-vertical">
+        <video src="public/img/ptb_video_vertical.mp4" controls></video>
+      </div>
+      <div class="item vertical"><img src="public/img/ptb_vertical2.jpg" alt=""></div>
+    </div>
+
+    <div class="nav">
+      <a class="btn" href="memory2.html">← Trước</a>
+      <a class="btn" href="../memories.html">Về gallery</a>
+      <a class="btn" href="memory4.html">Tiếp →</a>
+    </div>
+  </div>
+</body>
+</html>

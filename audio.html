@@ -1,0 +1,10 @@
+<audio id="bgm" loop preload="auto">
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+<script>
+  const bgm = document.getElementById('bgm');
+  window.addEventListener('click', function once() {
+    if (bgm && bgm.paused) bgm.play().catch(()=>{});
+    window.removeEventListener('click', once);
+  });
+</script>

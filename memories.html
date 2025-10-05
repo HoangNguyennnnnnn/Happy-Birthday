@@ -1,0 +1,205 @@
+<!-- FILE: index.html (đã chỉnh để load navbar từ navbar.html) -->
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>💞 Kỷ niệm của chúng ta</title>
+  <style>
+    :root{
+      --accent:#ff3c78;
+      --bg:#fff0f5;
+      --card:#ffffff;
+      --shadow: 0 6px 20px rgba(0,0,0,0.12);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family: "Segoe UI", Roboto, Arial;
+      background: linear-gradient(180deg,#ffe6f0,#fff7fb);
+      color:#333; min-height:100vh; padding:28px 18px 60px;
+    }
+
+    /* NAV (styles kept so navbar.html looks right when injected) */
+    header{
+      position:sticky; top:12px; z-index:30;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; max-width:1200px; margin:0 auto 18px; padding:10px 14px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.4));
+      border-radius:12px; box-shadow:0 8px 28px rgba(0,0,0,0.06);
+      backdrop-filter: blur(6px);
+    }
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{
+      width:44px; height:44px; border-radius:10px;
+      background:linear-gradient(90deg,var(--accent),#ff8fb5); display:flex;
+      align-items:center; justify-content:center; color:#fff; font-weight:800;
+    }
+    .title{font-weight:800; color:var(--accent)}
+    .nav-actions{display:flex; gap:8px; align-items:center}
+    .nav-actions a, .nav-actions button, .nav-actions label{
+      padding:8px 10px; border-radius:9px; border:none; cursor:pointer; text-decoration:none;
+      background:#fff; color:var(--accent); box-shadow:0 6px 18px rgba(0,0,0,0.04); font-weight:700;
+    }
+    .nav-actions a.active{ background:linear-gradient(90deg,var(--accent),#ff8fb5); color:#fff; }
+
+    h1{ color:var(--accent); text-align:center; margin:8px 0 6px; }
+    .subtitle{ text-align:center; margin-bottom:18px; color:#555; max-width:920px; margin-left:auto; margin-right:auto;}
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+      gap:20px; max-width:1100px; margin:0 auto 40px;
+    }
+
+    .card{
+      background:var(--card); border-radius:14px; overflow:hidden;
+      box-shadow: var(--shadow); transition: transform .22s ease, box-shadow .22s;
+      cursor:pointer;
+      text-decoration: none;
+      color: inherit;
+    }
+    .card:hover{ transform: translateY(-6px); box-shadow: 0 14px 40px rgba(0,0,0,0.18); }
+
+    .card img{ width:100%; height:180px; object-fit:cover; display:block; }
+    .card .meta{ padding:14px; text-align:left; }
+    .card .meta h3{ margin:0 0 6px; font-size:1.05rem; color:#222; }
+    .card .meta p{ margin:0; color:#666; font-size:0.95rem; }
+
+    .more-cta{ display:flex; align-items:center; justify-content:center; padding:18px; border-radius:12px; background:linear-gradient(90deg,var(--accent),#ff8fb5); color:#fff; font-weight:700; text-decoration:none; box-shadow: 0 10px 30px rgba(255,60,120,0.18); }
+
+    footer{ text-align:center; color:#777; margin-top:18px; font-size:13px; max-width:1100px; margin-left:auto; margin-right:auto; }
+
+    @media (max-width:420px){
+      .card img{ height:140px; }
+      header{ padding:8px; }
+      .nav-actions{ gap:6px }
+    }
+  </style>
+</head>
+<body>
+<iframe src="audio.html" allow="autoplay" style="display:none"></iframe>
+
+  <!-- placeholder: navbar sẽ được chèn ở đây -->
+  <div id="navbar-root"></div>
+
+  <main>
+    <h1>💞 Những kỷ niệm của chúng mình</h1>
+    <p class="subtitle">Nhấn vào ảnh để xem chi tiết — mỗi trang là một kỷ niệm đặc biệt ❤️</p>
+
+    <div class="grid" id="grid">
+      <a class="card" href="memory/memory1.html">
+        <img src="memory/public/img/memory1_1.png" alt="Lần đầu gặp lại">
+        <div class="meta">
+          <h3>Kỷ niệm 1 — Lần đầu gặp lại</h3>
+          <p>Buổi gặp đầu tiên sau thời gian xa cách — cảm xúc khó tả</p>
+        </div>
+      </a>
+
+      <a class="card" href="memory/memory2.html">
+        <img src="memory/public/img/memory2_2.png" alt="Đi xem phim với nhau">
+        <div class="meta">
+          <h3>Kỷ niệm 2 — Đi xem phim với nhau</h3>
+          <p>Ngồi cạnh nhau xem phim, ăn bỏng ngô và hiểu nhau hơn</p>
+        </div>
+      </a>
+
+      <a class="card" href="memory/memory3.html">
+        <img src="memory/public/img/ptb_h2.jpg" alt="Đi PTB với nhóm">
+        <div class="meta">
+          <h3>Kỷ niệm 3 — PTB cùng nhóm</h3>
+          <p>Zụng trộm không thể giấu :></p>
+        </div>
+      </a>
+
+      <a class="card" href="memory/memory4.html">
+        <img src="memory/public/img/sn3.jpg" alt="Homestay lần đầu + sinh nhật">
+        <div class="meta">
+          <h3>Kỷ niệm 4 — Homestay & Sinh nhật</h3>
+          <p>Lần homestay đầu tiên - tui thích bất ngờ roàiii :3</p>
+        </div>
+      </a>
+
+      <a class="card" href="memory/memory5.html">
+        <img src="memory/public/img/pho3.jpg" alt="Cà phê Hàng Buồm">
+        <div class="meta">
+          <h3>Kỷ niệm 5 — Đi cà phê Hàng Buồm nè</h3>
+          <p>Buổi dạo phố và ghé quán cà phê xinh — chill cùng nhau.</p>
+        </div>
+      </a>
+
+      <a class="card" href="memory/memory6.html">
+        <img src="memory/public/img/ptb2_9_7.jpg" alt="PTB ngày 2/9">
+        <div class="meta">
+          <h3>Kỷ niệm 6 — PTB ngày 2/9</h3>
+          <p>Kỷ niệm ngày lễ 2/9 cùng bé</p>
+        </div>
+      </a>
+
+      <a class="card" href="memory/memory7.html">
+        <img src="memory/public/img/sb12.png" alt="Ra sân bay tiễn người yêu">
+        <div class="meta">
+          <h3>Kỷ niệm 7 — Ra sân bay tiễn người yêu</h3>
+          <p>Khoảnh khắc tiễn biệt, ôm chặt và lời chúc ấm áp trước khi xa nhau</p>
+        </div>
+      </a>
+
+      <a class="card" href="more.html" style="display:flex;align-items:center;justify-content:center;">
+        <div style="padding:28px; text-align:center;">
+          <div style="font-size:36px; margin-bottom:8px;">✨</div>
+          <div style="font-weight:700; color:#ff3c78">Còn nhiều kỷ niệm nữa...</div>
+          <div style="color:#666; margin-top:6px">Nhấn vào để xem / thêm kỷ niệm</div>
+        </div>
+      </a>
+    </div>
+  </main>
+
+  <footer>
+    Love Journey • Created with ❤️
+  </footer>
+
+  <!-- load shared navbar script (phải có file navbar.js & navbar.html ở cùng thư mục) -->
+  <script src="navbar.js" defer></script>
+
+<script>
+  // Khi navbar được chèn, checkbox #openNewTab nằm trong đó.
+  // Mong muốn: checkbox này sẽ điều khiển việc mở chi tiết kỷ niệm (.grid a.card) ở tab mới.
+  // Vì navbar được load động, chờ phần tử tồn tại rồi thêm listener.
+
+  function whenElement(id, cb, interval = 80, timeout = 5000) {
+    const start = Date.now();
+    const i = setInterval(()=> {
+      const el = document.getElementById(id);
+      if (el) {
+        clearInterval(i);
+        cb(el);
+      } else if (Date.now() - start > timeout) {
+        clearInterval(i);
+        // không tìm thấy trong khoảng thời gian -> thôi
+      }
+    }, interval);
+  }
+
+  // Đồng bộ checkbox #openNewTab để điều khiển các .grid a.card (mở chi tiết ở tab mới)
+  whenElement('openNewTab', (checkbox) => {
+    const setGridTargets = (newTab) => {
+      document.querySelectorAll('.grid a.card').forEach(a=>{
+        if(newTab) a.setAttribute('target','_blank');
+        else a.removeAttribute('target');
+      });
+    };
+    // đặt trạng thái mặc định (nếu checkbox đã checked)
+    setGridTargets(checkbox.checked);
+    checkbox.addEventListener('change', (e)=> setGridTargets(e.target.checked));
+  });
+
+  // Accessibility: allow Enter/Space to "click" focused cards
+  document.querySelectorAll('.grid a.card').forEach(a=>{
+    a.addEventListener('keydown', (e)=>{
+      if(e.key === 'Enter' || e.key === ' ') { a.click(); }
+    });
+    a.setAttribute('tabindex','0');
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Kỷ niệm 7 — Ra sân bay</title>
+<style>
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:"Segoe UI",Arial;
+    background:linear-gradient(180deg,#fff6f9,#fff0f7);
+    color:#222;
+    overflow-x:hidden;
+  }
+
+  .wrap{
+    max-width:880px;
+    margin:28px auto;
+    padding:18px;
+  }
+  .card{
+    background:#fff;
+    border-radius:14px;
+    padding:18px;
+    box-shadow:0 12px 34px rgba(0,0,0,0.08);
+  }
+  h1{color:#ff3c78;margin:6px 0 10px}
+  p.lead{color:#555;margin:0 0 14px}
+  .top-row{
+    display:flex;
+    gap:18px;
+    flex-wrap:wrap;
+  }
+  .left{
+    flex:1;
+    min-width:280px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+  .right{
+    width:260px;
+    min-width:220px;
+  }
+
+  /* gallery chỉnh cho ảnh không tràn và tự xuống dòng */
+  .main-img{
+    width:100%;
+    max-height:360px;
+    height:auto;
+    object-fit:contain;
+    border-radius:10px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.08);
+    cursor:pointer;
+    background:#000;
+  }
+
+  /* vùng thumbnails: tự wrap và không tràn ra ngoài */
+  .thumbs{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:12px;
+    justify-content:center;
+  }
+  .thumbs img{
+    width:70px;
+    height:70px;
+    border-radius:8px;
+    cursor:pointer;
+    object-fit:cover;
+    border:3px solid transparent;
+    transition:transform .18s, border-color .18s;
+  }
+  .thumbs img:hover{transform:scale(1.05)}
+  .thumbs img.active{border-color:#ff3c78}
+
+  /* lightbox */
+  #lightbox{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.9);
+    z-index:999;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+  }
+  #lightbox img{
+    max-width:95%;
+    max-height:92%;
+    border-radius:10px;
+    display:flex;
+    object-fit:contain;
+  }
+
+  /* modal (wish + video) */
+  .modal-backdrop{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.45);
+    z-index:1200;
+    align-items:center;
+    justify-content:center;
+  }
+  .modal{
+    background:#fff;
+    border-radius:12px;
+    padding:18px;
+    max-width:520px;
+    width:92%;
+    box-shadow:0 18px 50px rgba(0,0,0,0.25);
+  }
+  .modal h2{margin:0 0 8px;color:#ff3c78}
+  .modal p{margin:0 0 12px;color:#333;white-space:pre-wrap}
+  .modal .actions{
+    display:flex;
+    gap:8px;
+    justify-content:flex-end;
+    margin-top:12px;
+  }
+  .modal .actions button{
+    padding:8px 12px;
+    border-radius:8px;
+    border:none;
+    cursor:pointer;
+  }
+  .btn-copy{
+    background:linear-gradient(90deg,#ff7aa3,#ff3c78);
+    color:#fff;
+  }
+  .btn-close{
+    background:#eee;
+    color:#444;
+  }
+
+  /* modal video (dọc 9:16) */
+  #videoModal .modal{
+    max-width:380px;
+    padding:0;
+    overflow:hidden;
+    border-radius:16px;
+  }
+  #videoModal video{
+    width:100%;
+    height:auto;
+    aspect-ratio:9/16;
+    display:block;
+    border-radius:16px;
+    object-fit:cover;
+    background:#000;
+  }
+
+  .note{
+    margin-top:12px;
+    color:#666;
+    font-size:14px;
+  }
+
+  .btn{
+    padding:10px 12px;
+    border-radius:8px;
+    text-decoration:none;
+    background:#ff3c78;
+    color:#fff;
+    font-weight:700;
+    display:block;
+    text-align:center;
+  }
+  .btn.ghost{
+    background:#fff;
+    border:1px solid #ffd5e6;
+    color:#ff3c78;
+  }
+  .small-btn{
+    display:inline-block;
+    padding:8px 10px;
+    border-radius:8px;
+    background:#fff;
+    border:1px solid #ffd5e6;
+    color:#ff3c78;
+    text-decoration:none;
+    font-weight:700;
+    cursor:pointer;
+  }
+
+  @media (max-width:880px){
+    .wrap{padding:14px}
+    .top-row{flex-direction:column}
+    .right{width:100%}
+    .main-img{max-height:300px}
+    .thumbs img{width:64px;height:64px}
+  }
+</style>
+</head>
+<body>
+  <iframe src="audio.html" allow="autoplay" style="display:none"></iframe>
+
+  <div class="wrap">
+    <div class="card">
+      <h1>Kỷ niệm 7 — Hẹn gặp lại mình nha</h1>
+      <p class="lead">Khóc lụt sân bay luôn ròii 😭💔</p>
+
+      <div class="top-row">
+        <!-- left: gallery -->
+        <div class="left">
+          <img id="mainImage" class="main-img" src="public/img/sb1.png" alt="Sân bay - 1">
+          <div class="thumbs" id="thumbs">
+            <img src="public/img/sb1.png" data-full="public/img/sb1.png" class="active" alt="Thượng cờ nè">
+            <img src="public/img/sb2.png" data-full="public/img/sb2.png" alt="">
+            <img src="public/img/sb3.png" data-full="public/img/sb3.png" alt="">
+            <img src="public/img/sb4.png" data-full="public/img/sb4.png" alt="">
+            <img src="public/img/sb5.png" data-full="public/img/sb5.png" alt="">
+            <img src="public/img/sb7.png" data-full="public/img/sb7.png" alt="">
+            <img src="public/img/sb8.png" data-full="public/img/sb8.png" alt="">
+            <img src="public/img/sb9.png" data-full="public/img/sb9.png" alt="">
+            <img src="public/img/sb10.png" data-full="public/img/sb10.png" alt="">
+            <img src="public/img/sb11.png" data-full="public/img/sb11.png" alt="">
+            <img src="public/img/sb12.png" data-full="public/img/sb12.png" alt="">
+          </div>
+          <div class="note">Nhấn ảnh thu nhỏ để thay ảnh chính. Nhấn ảnh chính để xem full-screen.</div>
+        </div>
+
+        <!-- right: actions -->
+        <aside class="right">
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <button class="small-btn" id="openVideoBtn">📹 Xem video</button>
+            <button class="small-btn" id="openWishBtn">🎁 Lời chúc</button>
+            <a class="btn ghost" href="../memories.html">← Về gallery</a>
+            <a class="btn" href="memory6.html">← Kỷ niệm trước</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <!-- lightbox -->
+  <div id="lightbox" onclick="closeLightbox()">
+    <img id="lbimg" src="" alt="Full image">
+  </div>
+
+  <!-- modal for wish -->
+  <div id="modalBackdrop" class="modal-backdrop" onclick="tryCloseModal(event)">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <h2 id="modalTitle">Lời chúc</h2>
+      <p id="wishText">Mình đi cẩn thận nhé. Tui ở đây với mình nè. Yêu mình rất nhiều 💕</p>
+      <div class="actions">
+        <button class="btn-copy" id="copyWishBtn">Sao chép</button>
+        <button class="btn-close" id="closeModalBtn">Đóng</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- modal for video -->
+  <div id="videoModal" class="modal-backdrop" onclick="tryCloseVideo(event)">
+    <div class="modal" role="dialog" aria-modal="true">
+      <video id="memoryVideo" controls>
+        <source src="public/img/sanbay.mp4" type="video/mp4">
+        Trình duyệt không hỗ trợ video.
+      </video>
+      <div class="actions" style="padding:10px 12px;justify-content:flex-end">
+        <button class="btn-close" id="closeVideoBtn">Đóng</button>
+      </div>
+    </div>
+  </div>
+
+<script>
+  // Gallery
+  const thumbs = document.getElementById('thumbs');
+  const mainImage = document.getElementById('mainImage');
+  const tbNodes = thumbs.querySelectorAll('img');
+  tbNodes.forEach(img=>{
+    img.addEventListener('click', ()=>{
+      tbNodes.forEach(i=>i.classList.remove('active'));
+      img.classList.add('active');
+      mainImage.src = img.dataset.full || img.src;
+    });
+  });
+
+  // Lightbox
+  const lightbox = document.getElementById('lightbox');
+  const lbimg = document.getElementById('lbimg');
+  mainImage.addEventListener('click', ()=> {
+    lbimg.src = mainImage.src;
+    lightbox.style.display = 'flex';
+  });
+  function closeLightbox(){
+    lightbox.style.display='none';
+    lbimg.src='';
+  }
+
+  // Wish modal
+  const modalBackdrop = document.getElementById('modalBackdrop');
+  const openWishBtn = document.getElementById('openWishBtn');
+  const closeModalBtn = document.getElementById('closeModalBtn');
+  const copyWishBtn = document.getElementById('copyWishBtn');
+  const wishTextEl = document.getElementById('wishText');
+
+  openWishBtn.addEventListener('click', ()=> { modalBackdrop.style.display = 'flex'; });
+  function tryCloseModal(e){ if(e.target === modalBackdrop) modalBackdrop.style.display='none'; }
+  closeModalBtn.addEventListener('click', ()=> modalBackdrop.style.display='none');
+  copyWishBtn.addEventListener('click', ()=> {
+    const txt = wishTextEl.innerText;
+    navigator.clipboard?.writeText(txt).then(()=>{
+      copyWishBtn.textContent='Đã sao chép ✓';
+      setTimeout(()=>copyWishBtn.textContent='Sao chép',1500);
+    });
+  });
+
+  // Video modal
+  const videoModal = document.getElementById('videoModal');
+  const openVideoBtn = document.getElementById('openVideoBtn');
+  const closeVideoBtn = document.getElementById('closeVideoBtn');
+  const memoryVideo = document.getElementById('memoryVideo');
+
+  openVideoBtn.addEventListener('click', ()=>{
+    videoModal.style.display='flex';
+    memoryVideo.play();
+  });
+  function tryCloseVideo(e){
+    if(e.target === videoModal){ closeVideo(); }
+  }
+  closeVideoBtn.addEventListener('click', closeVideo);
+  function closeVideo(){
+    memoryVideo.pause();
+    videoModal.style.display='none';
+  }
+
+  // ESC closes all
+  document.addEventListener('keydown', (e)=>{
+    if(e.key==='Escape'){
+      if(lightbox.style.display==='flex') closeLightbox();
+      if(modalBackdrop.style.display==='flex') modalBackdrop.style.display='none';
+      if(videoModal.style.display==='flex') closeVideo();
+    }
+  });
+</script>
+</body>
+</html>

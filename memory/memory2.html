@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Kỷ niệm 2 — Đi xem phim với nhau</title>
+<style>
+  body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(180deg, #fff7fb, #fff0f5);
+    color: #222;
+  }
+  .wrap {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+  }
+  .card {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    overflow: hidden;
+  }
+
+  /* --- Bố cục gallery 3 ảnh vuông --- */
+  .gallery {
+    display: grid;
+    gap: 10px;
+    grid-template-areas:
+      "big small1"
+      "big small2";
+    grid-template-columns: 2fr 1fr;
+    padding: 14px;
+  }
+  .gallery img {
+    width: 100%;
+    aspect-ratio: 1 / 1;   /* ảnh vuông */
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .gallery img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  }
+  .gallery .big   { grid-area: big; height: 100%; }
+  .gallery .small1 { grid-area: small1; }
+  .gallery .small2 { grid-area: small2; }
+
+  .content {
+    padding: 20px;
+  }
+  h1 {
+    color: #ff3c78;
+    margin: 0 0 10px;
+  }
+  p {
+    line-height: 1.6;
+    color: #444;
+  }
+
+  .nav {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 20px;
+  }
+  .btn {
+    display: inline-block;
+    padding: 10px 16px;
+    background: #ff3c78;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: background 0.25s ease;
+  }
+  .btn:hover {
+    background: #e83270;
+  }
+
+  @media (max-width: 700px) {
+    .gallery {
+      grid-template-areas:
+        "big"
+        "small1"
+        "small2";
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+</head>
+<body>
+  <iframe src="audio.html" allow="autoplay" style="display:none"></iframe>
+
+  <div class="wrap">
+    <div class="card">
+      <div class="gallery">
+        <img src="public/img/memory2_2.png" alt="Ảnh chính" class="big">
+        <img src="public/img/memory2_3.png" alt="Ảnh nhỏ 1" class="small1">
+        <img src="public/img/memory2_1.png" alt="Ảnh nhỏ 2" class="small2">
+      </div>
+
+      <div class="content">
+        <h1>Kỷ niệm 2 — Đi xem phim với nhau</h1>
+        <p>
+          Ăn bún đậu => xem phim :> 
+          <br/>
+          “Một nửa hoàn hảo” 🎬 — ngồi sát cạnh nhau, chia nhau bỏng ngô, cùng cười và cùng im lặng trong những khoảnh khắc đáng nhớ.
+        </p>
+
+        <div class="nav">
+          <a class="btn" href="memory1.html">← Trước</a>
+          <a class="btn" href="../memories.html">Về gallery</a>
+          <a class="btn" href="memory3.html">Tiếp →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

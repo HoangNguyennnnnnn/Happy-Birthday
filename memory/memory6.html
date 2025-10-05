@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Kỷ niệm 6 — Photobooth & Pháo hoa</title>
+<style>
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:"Segoe UI",Arial;
+    background:linear-gradient(180deg,#ffeef5 0%,#ffd6e6 40%,#2b2340 70%,#0d0d18 100%);
+    color:#222;
+    overflow-x:hidden;
+    transition:background 2s ease;
+  }
+
+  body.night {
+    background:linear-gradient(180deg,#1b1130 0%,#0d0d18 100%);
+    color:#f5f5f5;
+  }
+
+  .wrap{
+    max-width:1000px;
+    margin:40px auto;
+    padding:18px;
+    position:relative;
+    z-index:2;
+  }
+  .card{
+    background:#fff;
+    border-radius:14px;
+    padding:22px;
+    box-shadow:0 12px 34px rgba(0,0,0,0.08);
+    position:relative;
+    overflow:hidden;
+    transition:background 1s ease,color 1s ease;
+  }
+  body.night .card{
+    background:rgba(255,255,255,0.1);
+    color:#f5f5f5;
+  }
+  h1{color:#ff3c78;margin-top:0}
+  h2{color:#6b2c3a;margin:12px 0 6px}
+  body.night h1{color:#ff9fcd;}
+  body.night h2{color:#ffc1dc;}
+  p{color:#555;margin:0 0 10px}
+  body.night p{color:#ddd;}
+
+  .timeline{
+    border-left:3px solid #ffd7e6;
+    padding-left:16px;
+    margin-top:10px;
+  }
+  .event{margin-bottom:18px}
+
+  /* photobooth zone */
+  .photo-zone{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:12px;
+  }
+  .photo-zone img{
+    width:150px;
+    height:200px;
+    object-fit:cover;
+    border-radius:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.15);
+    cursor:pointer;
+    transition:transform .2s;
+  }
+  .photo-zone img:hover{transform:scale(1.05)}
+
+  /* pháo hoa canvas */
+  canvas{
+    position:fixed;
+    left:0;top:0;
+    width:100%;height:100%;
+    pointer-events:none;
+    z-index:1;
+  }
+
+  /* controls */
+  .controls{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin-top:24px;
+  }
+  .btn{
+    padding:10px 16px;
+    background:#6b2c3a;
+    color:#fff;
+    border:none;
+    text-decoration:none;
+    font-weight:600;
+    transition:transform 0.1s ease, background .3s;
+  }
+  .btn:first-child{border-radius:10px 0 0 10px;}
+  .btn:last-child{border-radius:0 10px 10px 0;}
+  .btn:active{transform:scale(0.97);}
+  .btn:hover{background:#a84d5f;}
+</style>
+</head>
+<body>
+  <iframe src="audio.html" allow="autoplay" style="display:none"></iframe>
+
+<canvas id="fw"></canvas>
+
+<div class="wrap">
+  <div class="card">
+    <h1>Kỷ niệm 6 — Photobooth & Pháo hoa</h1>
+    <p>Một ngày thật đáng yêu: chiều đi photobooth, tối cùng nhau xem pháo hoa lung linh từ xa 💖</p>
+
+    <div class="timeline">
+      <div class="event">
+        <h2>Chiều: Photobooth nè</h2>
+        <p>Lung linh cùng e iuuuu</p>
+        <div class="photo-zone">
+          <img src="public/img/ptb2_9_5.jpg" alt="ptb1">
+          <img src="public/img/ptb2_9_6.jpg" alt="ptb2">
+          <img src="public/img/ptb2_9_7.jpg" alt="ptb3">
+          <img src="public/img/ptb2_9_9.jpg" alt="ptb4">
+          <img src="public/img/ptb2_9_5.jpg" alt="ptb5">
+          <img src="public/img/ptb2_9_2.jpg" alt="ptb6">
+          <img src="public/img/ptb2_9_1.jpg" alt="ptb7">
+          <img src="public/img/ptb2_9_8.jpg" alt="ptb8">
+          <img src="public/img/ptb2_9_4.jpg" alt="ptb9">
+          <img src="public/img/ptb2_9_10.jpg" alt="ptb10">
+        </div>
+      </div>
+      <div class="event">
+        <h2>Tối: Ngắm pháo hoa</h2>
+        <p>Ngắm pháo hoa với người yêuu🎆</p>
+      </div>
+    </div>
+
+    <div class="controls">
+      <a class="btn" href="memory5.html">← Trước</a>
+      <a class="btn" href="../memories.html">Về gallery</a>
+      <a class="btn" href="memory7.html">Tiếp →</a>
+      <a class="btn" onclick="launchFireworks()">🎇 Xem pháo hoa</a>
+    </div>
+  </div>
+</div>
+
+<script>
+const c = document.getElementById('fw'), ctx = c.getContext('2d');
+function resize(){ c.width = window.innerWidth; c.height = window.innerHeight; }
+window.addEventListener('resize', resize); resize();
+
+let particles = [];
+function rand(min,max){ return Math.random()*(max-min)+min; }
+
+function createFirework(x,y){
+  const count = 60;
+  for(let i=0;i<count;i++){
+    particles.push({
+      x:x, y:y,
+      vx: Math.cos(2*Math.PI*(i/count)) * rand(0.8,3),
+      vy: Math.sin(2*Math.PI*(i/count)) * rand(0.8,3),
+      life: rand(60,120),
+      color: ['#ff6ec4','#ffd166','#7ad1ff','#a6ffcb'][Math.floor(Math.random()*4)]
+    });
+  }
+}
+
+function update(){
+  ctx.clearRect(0,0,c.width,c.height);
+  for(let i=particles.length-1;i>=0;i--){
+    const p=particles[i];
+    p.x += p.vx;
+    p.y += p.vy;
+    p.vy += 0.02;
+    p.life--;
+    ctx.globalAlpha = Math.max(p.life/100, 0);
+    ctx.fillStyle = p.color;
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,2,0,Math.PI*2);
+    ctx.fill();
+    if(p.life<=0) particles.splice(i,1);
+  }
+  ctx.globalAlpha = 1;
+  requestAnimationFrame(update);
+}
+update();
+
+function launchFireworks(){
+  document.body.classList.add("night");
+  for(let i=0;i<6;i++){
+    setTimeout(()=> createFirework(rand(c.width*0.2,c.width*0.8), rand(100, c.height*0.5)), i*400);
+  }
+}
+</script>
+</body>
+</html>

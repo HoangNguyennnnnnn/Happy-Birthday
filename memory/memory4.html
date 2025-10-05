@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Kỷ niệm 4 — Homestay & Sinh nhật</title>
+<style>
+  :root{--pink:#ff3c78;--bg:#fff0f5}
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:"Segoe UI", Arial;
+    background:linear-gradient(180deg,#fff7f6,#fff0f5);
+    color:#222;
+  }
+  .wrap{
+    max-width:1000px;
+    margin:36px auto;
+    padding:18px;
+  }
+  .card{
+    background:#fff;
+    border-radius:14px;
+    box-shadow:0 14px 40px rgba(0,0,0,0.08);
+    overflow:hidden;
+  }
+  .content{padding:18px}
+  h1{color:var(--pink);margin:0 0 6px}
+  p{line-height:1.6}
+  .btn{
+    display:inline-block;
+    padding:10px 14px;
+    background:var(--pink);
+    color:#fff;
+    border-radius:10px;
+    text-decoration:none;
+    font-weight:700;
+  }
+
+  /* slideshow (ảnh dọc căn giữa) */
+  .slideshow{
+    position:relative;
+    margin-top:14px;
+    border-radius:10px;
+    overflow:hidden;
+    background:#f9f9f9;
+    height:500px; /* khung hiển thị cố định */
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .slides{
+    display:flex;
+    transition:transform .5s ease;
+    touch-action:pan-y;
+    width:100%;
+    height:100%;
+  }
+  /* mỗi slide chiếm đúng 100% khung để translateX(-idx * 100%) hoạt động chính xác */
+  .slide{
+    flex:0 0 100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    height:100%;
+  }
+  .slide img{
+    height:100%;
+    width:auto;
+    max-width:100%;
+    object-fit:contain;
+    margin:0;
+    background:#fff;
+  }
+  .sl-prev,.sl-next{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    background:rgba(255,255,255,0.9);
+    border:none;
+    padding:8px 10px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:18px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.08);
+  }
+  .sl-prev{left:10px}
+  .sl-next{right:10px}
+
+  /* cake image */
+  .cake-img{
+    margin-top:24px;
+    text-align:center;
+  }
+  .cake-img img{
+    width:100%;
+    max-width:320px;
+    border-radius:14px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.15);
+  }
+  .cake-img p{
+    font-weight:700;
+    margin-top:10px;
+    color:var(--pink);
+  }
+
+  .nav{
+    display:flex;
+    gap:10px;
+    margin-top:24px;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+
+  @media (max-width:600px){
+    .slideshow{height:60vh}
+  }
+</style>
+</head>
+<body>
+<iframe src="audio.html" allow="autoplay" style="display:none"></iframe>
+
+<div class="wrap">
+  <div class="card">
+    <div class="content">
+      <h1>Kỷ niệm 4 — Homestay lần đầu & Sinh nhật</h1>
+
+<p>Chúng mình cùng nhau xem phim, nấu cơm và skincare<br/>
+        Em đã chuẩn bị cho anh một buổi sinh nhật bất ngờ — thấy yêu mình rất nhiều :33</p>
+      <!-- cake image -->
+      <div class="cake-img">
+        <img src="public/img/cake.png" alt="Bánh kem sinh nhật">
+        <p>Sinh nhật bất ngờ 🎂</p>
+      </div>
+
+      <!-- slideshow -->
+      <div class="slideshow" id="slideshow">
+        <div class="slides" id="slides">
+          <div class="slide"><img src="public/img/sn1.jpg" alt="hs1"></div>
+          <div class="slide"><img src="public/img/sn2.jpg" alt="hs2"></div>
+          <div class="slide"><img src="public/img/sn3.jpg" alt="hs3"></div>
+          <div class="slide"><img src="public/img/sn4.jpg" alt="hs4"></div>
+          <div class="slide"><img src="public/img/sn5.jpg" alt="hs5"></div>
+          <div class="slide"><img src="public/img/sn6.png" alt="hs6"></div>
+        </div>
+        <button class="sl-prev" id="prevBtn" aria-label="Previous">◀</button>
+        <button class="sl-next" id="nextBtn" aria-label="Next">▶</button>
+      </div>
+
+      <!-- navigation -->
+      <div class="nav">
+        <a class="btn" href="memory3.html">← Trước</a>
+        <a class="btn" href="../memories.html">Về gallery</a>
+        <a class="btn" href="memory5.html">Tiếp →</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+const slides = document.getElementById('slides');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+let idx = 0;
+
+function update() {
+  const count = slides.children.length;
+  // đảm bảo idx nằm trong [0, count-1] -> tránh chặn hoặc vượt biên
+  if (idx < 0) idx = 0;
+  if (idx > count - 1) idx = count - 1;
+  slides.style.transform = `translateX(-${idx * 100}%)`;
+}
+
+function moveSlide(dir){
+  const count = slides.children.length;
+  idx = idx + dir;
+  // nếu muốn cho wrap-around, dùng modulo; ở đây ta clamp để không wrap và không "chặn".
+  if (idx < 0) idx = 0;
+  if (idx >= count) idx = count - 1;
+  update();
+}
+
+prevBtn.addEventListener('click', ()=> moveSlide(-1));
+nextBtn.addEventListener('click', ()=> moveSlide(1));
+
+// hỗ trợ phím mũi tên
+window.addEventListener('keydown', (e)=>{
+  if (e.key === 'ArrowLeft') moveSlide(-1);
+  if (e.key === 'ArrowRight') moveSlide(1);
+});
+
+// hỗ trợ swipe (cảm ứng)
+let startX = 0;
+let isTouch = false;
+slides.addEventListener('touchstart', (e)=>{
+  isTouch = true;
+  startX = e.touches[0].clientX;
+});
+slides.addEventListener('touchend', (e)=>{
+  if (!isTouch) return;
+  const endX = e.changedTouches[0].clientX;
+  const diff = endX - startX;
+  if (Math.abs(diff) > 40) {
+    if (diff < 0) moveSlide(1); else moveSlide(-1);
+  }
+  isTouch = false;
+});
+
+// đảm bảo layout đúng khi thay đổi kích thước (nếu ảnh tải chậm)
+window.addEventListener('load', update);
+window.addEventListener('resize', update);
+</script>
+</body>
+</html>

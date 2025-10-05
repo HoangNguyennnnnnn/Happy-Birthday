@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Love Journey — Hna 💖 Nthz</title>
+<style>
+  :root{
+    --accent:#ff6ec4;
+    --accent-2:#7a5cff;
+    --gutter:120px;
+    --max-width:1100px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:"Segoe UI", Roboto, Arial;
+    color:#fff;
+    background:linear-gradient(120deg,#ff9ab8,#fbc2eb,#a6c1ee,#7ad1ff);
+    background-size:300% 300%;
+    animation:bgMove 12s ease infinite;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+    overflow-x:hidden;
+  }
+  @keyframes bgMove{
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+  }
+
+  .birthday-msg{
+    margin-top: 20px;
+    position:fixed;
+    top:14px;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:10;
+    color:#ff3c78;
+    font-size:30px;
+    font-weight:700;
+    text-align:center;
+  }
+
+  .bg-photo{
+    position:fixed;inset:0;z-index:0;
+    background-size:cover;background-position:center;
+    opacity:0.12;filter:blur(2px);
+  }
+
+  .outer{
+    width:min(var(--max-width),100%);
+    display:grid;
+    grid-template-columns:var(--gutter) 1fr var(--gutter);
+    gap:20px;
+    align-items:start;
+    position:relative;
+    z-index:2;
+  }
+  @media (max-width:1000px){
+    :root{--gutter:0px;}
+    .outer{grid-template-columns:0px 1fr 0px;}
+  }
+
+  .wrap{grid-column:2/3;display:grid;grid-template-columns:1fr 420px;gap:30px;align-items:center;}
+  @media (max-width:880px){.wrap{grid-template-columns:1fr;padding:12px;gap:18px;}}
+
+  .hero{
+    padding:28px;
+    background:rgba(255,255,255,0.06);
+    border-radius:18px;
+    backdrop-filter:blur(8px);
+    box-shadow:0 8px 40px rgba(0,0,0,0.18);
+    border:1px solid rgba(255,255,255,0.08);
+  }
+
+  h1{font-size:clamp(28px,3.6vw,44px);margin-bottom:8px;letter-spacing:1px;}
+  p.lead{margin-bottom:18px;color:rgba(255,255,255,0.92);}
+
+  .count-card{display:flex;gap:12px;align-items:center;padding:18px;border-radius:12px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.06);width:fit-content;}
+  .time-block{text-align:center;min-width:90px;padding:8px 12px;border-radius:10px;background:rgba(255,255,255,0.02);box-shadow:0 6px 20px rgba(0,0,0,0.12);}
+  .time-block .num{font-size:clamp(20px,3.2vw,34px);font-weight:700;color:#fff;}
+  .time-block .lbl{font-size:12px;color:rgba(255,255,255,0.85);margin-top:6px;}
+
+  .right-panel{padding:22px;border-radius:18px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.06);text-align:center;}
+  .cta{display:inline-block;margin-top:12px;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;padding:12px 22px;border-radius:12px;text-decoration:none;font-weight:700;box-shadow:0 8px 30px rgba(122,92,255,0.2);}
+  .hint{margin-top:10px;font-size:12px;color:rgba(255,255,255,0.85)}
+
+  footer{position:fixed;left:50%;bottom:12px;transform:translateX(-50%);z-index:4;color:rgba(255,255,255,0.95);font-size:12px;background:rgba(0,0,0,0.12);padding:6px 10px;border-radius:10px;pointer-events:none;backdrop-filter:blur(4px);}
+
+  .gutter{position:relative;height:100%;pointer-events:none;}
+  .float-side{position:sticky;top:80px;display:flex;flex-direction:column;gap:18px;align-items:center;}
+  .float-side img{width:72px;height:72px;object-fit:cover;border-radius:12px;box-shadow:0 14px 30px rgba(0,0,0,0.28);animation:floaty 6s ease-in-out infinite;}
+  @keyframes floaty{0%{transform:translateY(0)}50%{transform:translateY(-12px)}100%{transform:translateY(0)}}
+  @media (max-width:1000px){.gutter{display:none;}}
+</style>
+</head>
+<body>
+
+<div class="birthday-msg">🎂 Chúc mừng sinh nhật người iu thơmmm 🎂</div>
+
+<div class="bg-photo" id="bgPhoto" style="background-image:url('bg-couple.jpg');"></div>
+
+<div class="outer">
+  <div class="gutter" id="gutter-left"><div class="float-side" id="float-left"></div></div>
+
+  <div class="wrap">
+    <section class="hero">
+      <h1>:3 hna :3 💖 -.nthz.-</h1>
+      <p class="lead">Mỗi ngày bên nhau là một kỷ niệm. Mình đã ở bên nhau — đếm từng ngày, giờ, phút, giây ❤️</p>
+      <div class="count-card" aria-live="polite">
+        <div class="time-block"><div class="num" id="years">00</div><div class="lbl">Năm</div></div>
+        <div class="time-block"><div class="num" id="days">00</div><div class="lbl">Ngày</div></div>
+        <div class="time-block"><div class="num" id="hours">00</div><div class="lbl">Giờ</div></div>
+        <div class="time-block"><div class="num" id="minutes">00</div><div class="lbl">Phút</div></div>
+        <div class="time-block"><div class="num" id="seconds">00</div><div class="lbl">Giây</div></div>
+      </div>
+      <div style="margin-top:18px"><small class="hint">Note: nhấn nút "Xem kỷ niệm" đi bé :3</small></div>
+    </section>
+
+    <aside class="right-panel">
+      <h3>Gửi tới công chúa của tuiiiii :3</h3>
+      <p style="font-size:14px;color:rgba(255,255,255,0.95)">Đi tới bất ngờ nào ❤️</p>
+      <a class="cta" href="memories.html" id="toMemories">👉 Xem bất ngờ</a>
+    </aside>
+  </div>
+
+  <div class="gutter" id="gutter-right"><div class="float-side" id="float-right"></div></div>
+</div>
+
+<footer>Love Journey • Created with ❤️</footer>
+
+<iframe src="audio.html" allow="autoplay" style="display:none"></iframe>
+
+<script>
+  const startDate = new Date('2025-07-26T21:30:00');
+  function pad(n){ return n < 10 ? '0'+n : n; }
+  function updateElapsed(){
+    const now = new Date();
+    if(now - startDate < 0){
+      ['years','days','hours','minutes','seconds'].forEach(id=>document.getElementById(id).textContent='00');
+      return;
+    }
+    let years = now.getFullYear() - startDate.getFullYear();
+    const tmp = new Date(startDate); tmp.setFullYear(startDate.getFullYear() + years);
+    if(tmp > now){ years--; tmp.setFullYear(startDate.getFullYear() + years); }
+    let remMs = now - tmp;
+    const days = Math.floor(remMs / (1000*60*60*24)); remMs -= days * (1000*60*60*24);
+    const hours = Math.floor(remMs / (1000*60*60)); remMs -= hours * (1000*60*60);
+    const minutes = Math.floor(remMs / (1000*60)); remMs -= minutes * (1000*60);
+    const seconds = Math.floor(remMs / 1000);
+    document.getElementById('years').textContent = pad(years);
+    document.getElementById('days').textContent = pad(days);
+    document.getElementById('hours').textContent = pad(hours);
+    document.getElementById('minutes').textContent = pad(minutes);
+    document.getElementById('seconds').textContent = pad(seconds);
+  }
+  setInterval(updateElapsed, 1000); updateElapsed();
+
+  const particles = document.getElementById('particles');
+  function spawnHeart(){
+    const el = document.createElement('div'); el.className='particle'; el.textContent='❤️';
+    const size = 12 + Math.random()*22; el.style.fontSize = size + 'px';
+    el.style.left = Math.random()*100 + 'vw'; el.style.top = (80 + Math.random()*30) + 'vh';
+    el.style.animationDuration = (4 + Math.random()*4) + 's'; particles.appendChild(el);
+    setTimeout(()=> el.remove(), 9000);
+  }
+  setInterval(spawnHeart, window.innerWidth < 600 ? 900 : 500);
+
+  const bgm = document.getElementById('bgm');
+  window.addEventListener('click', function once(){ if(bgm && bgm.paused){ bgm.play().catch(()=>{}); } window.removeEventListener('click', once); });
+
+  const floatImgs = ['small1.jpg','small2.jpg','small3.jpg','small4.jpg','small5.jpg'];
+  function renderFloaters(){
+    const left = document.getElementById('float-left');
+    const right = document.getElementById('float-right');
+    left.innerHTML = right.innerHTML = '';
+    for(let i=0;i<3;i++){
+      const imgL = document.createElement('img');
+      imgL.src = floatImgs[i % floatImgs.length];
+      imgL.style.animationDelay = (Math.random()*2)+'s';
+      left.appendChild(imgL);
+      const imgR = document.createElement('img');
+      imgR.src = floatImgs[(i+3)%floatImgs.length];
+      imgR.style.animationDelay = (Math.random()*2)+'s';
+      right.appendChild(imgR);
+    }
+  }
+  document.addEventListener('DOMContentLoaded', renderFloaters);
+
+  (function checkBg(){
+    const el = document.getElementById('bgPhoto');
+    if(!el.style.backgroundImage || el.style.backgroundImage === 'url("")') el.style.display='none';
+  })();
+</script>
+</body>
+</html>

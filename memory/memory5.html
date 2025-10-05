@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Kỷ niệm 5 — Cà phê hàng buồm</title>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Segoe UI",Arial;background:#fffaf8;color:#222}
+  .hero-wrap{position:relative;height:360px;overflow:hidden}
+  .hero-bg{position:absolute;inset:0;background-image:url('photo5-hero.jpg');background-size:cover;background-position:center;filter:brightness(.75);transform:translateZ(0);}
+  .hero-text{position:relative;z-index:2;color:#fff;padding:36px}
+  h1{margin:16px 0;color:#6b2c3a}
+  .wrap{max-width:900px;margin:-60px auto 40px;padding:18px}
+  .card{background:#fff;padding:18px;border-radius:14px;box-shadow:0 12px 30px rgba(0,0,0,0.08)}
+  .coffee{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+  .cup{width:180px;height:140px;border-radius:12px;background:linear-gradient(180deg,#fffdf8,#fff2e4);display:flex;align-items:center;justify-content:center;position:relative;box-shadow:0 8px 20px rgba(0,0,0,0.08)}
+  .steam{position:absolute;top:10px;width:40px;height:60px;left:calc(50% - 20px);opacity:.9}
+  .steam::before,.steam::after{content:'';position:absolute;left:0;right:0;height:100%;border-radius:20px;background:linear-gradient(180deg,rgba(255,255,255,.9),rgba(255,255,255,0));animation:steam 3s linear infinite}
+  .steam::after{animation-delay:1.2s}
+  @keyframes steam{0%{transform:translateY(18px) scale(.6);opacity:.0}50%{transform:translateY(0) scale(1);opacity:.9}100%{transform:translateY(-28px) scale(.6);opacity:0}}
+  
+  /* carousel */
+  .carousel{display:flex;gap:10px;overflow-x:auto;margin-top:12px;align-items:center;scrollbar-width:none}
+  .carousel::-webkit-scrollbar{display:none}
+  .carousel img{height:120px;border-radius:10px;object-fit:cover;cursor:pointer;transition:transform .2s}
+  .carousel img:hover{transform:scale(1.06)}
+  
+  /* buttons */
+  .controls{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
+  .btn{padding:8px 12px;background:#6b2c3a;color:#fff;border-radius:8px;text-decoration:none;font-weight:700;cursor:pointer}
+  .note{margin-top:12px;color:#555}
+  
+  /* lightbox ảnh + caption */
+  #lb{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:999;align-items:center;justify-content:center;flex-direction:column;padding:20px;text-align:center}
+  #lb img{max-width:90%;max-height:80%;border-radius:10px;box-shadow:0 12px 40px rgba(0,0,0,0.6)}
+  #caption{color:#fff;margin-top:16px;font-size:16px;max-width:80%;line-height:1.5;font-style:italic}
+  
+  /* video popup */
+  #videoBox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:1000;align-items:center;justify-content:center}
+  #videoBox video {
+    max-height: 90%;
+    height: auto;
+    width: auto;
+    max-width: 60%; 
+    border-radius: 10px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.7);
+    object-fit: contain;
+  }
+  #videoBox button{position:absolute;top:20px;right:30px;background:rgba(255,255,255,0.8);border:none;padding:8px 12px;border-radius:6px;cursor:pointer;font-weight:700}
+</style>
+</head>
+<body>
+<iframe src="audio.html" allow="autoplay" style="display:none"></iframe>
+
+<div class="hero-wrap">
+  <div class="hero-bg" style="background-image:url('photo5-hero.jpg')"></div>
+  <div class="hero-text" style="padding:28px;">
+    <h1>Đi cà phê nàooooo</h1>
+    <p>Đi cafe zui zẻ cùng người iuuu</p>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="card">
+    <div class="coffee">
+      <div class="cup">
+        <div class="steam"></div>
+        <img src="public/img/pho3.jpg" alt="cup" style="width:70px;opacity:.9">
+      </div>
+      <div>
+        <h2 style="margin:0;color:#6b2c3a">Kỷ niệm 5 — Cà phê hàng buồm</h2>
+        <p class="note">Buổi sáng healing với bé</p>
+        <div class="controls">
+          <a class="btn" href="memory4.html">← Trước</a>
+          <a class="btn" href="../memories.html">Về gallery</a>
+          <a class="btn" href="memory6.html">Tiếp →</a>
+          <button class="btn" onclick="showVideo()">▶ Xem video kỷ niệm</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="carousel" id="carousel">
+      <img src="public/img/pho1.jpg" alt="" data-caption="Chụp chung mí bé iuu ☀️" onclick="openLightbox(this)">
+      <img src="public/img/pho2.jpg" alt="" data-caption="Chói mắt chưaaa" onclick="openLightbox(this)">
+      <img src="public/img/pho3.jpg" alt="" data-caption="Thơm ải thơm aiiiii 😚" onclick="openLightbox(this)">
+      <img src="public/img/cf.png" alt="" data-caption="Cà phê trứng nè ☕" onclick="openLightbox(this)">
+      <img src="public/img/cf+phim.jpg" alt="" data-caption="Phim hayyyy 🍿" onclick="openLightbox(this)">
+      <img src="public/img/cfgiuongnam.jpg" alt="" data-caption="Ấm cúng quá chòi 🤍" onclick="openLightbox(this)">
+    </div>
+
+    <div style="margin-top:12px;color:#666">Ấn zô ảnh đi mìnhh :3</div>
+  </div>
+</div>
+
+<!-- lightbox ảnh -->
+<div id="lb">
+  <img id="lbimg" src="">
+  <div id="caption"></div>
+</div>
+
+<!-- popup video -->
+<div id="videoBox">
+  <button onclick="closeVideo()">✕ Đóng</button>
+  <video id="capcutVideo" controls>
+    <source src="public/img/cf.mp4" type="video/mp4">
+    Trình duyệt không hỗ trợ video.
+  </video>
+</div>
+
+<script>
+/* parallax effect */
+const heroBg = document.querySelector('.hero-bg');
+window.addEventListener('scroll', ()=> {
+  const y = window.scrollY;
+  heroBg.style.transform = `translateY(${y * 0.2}px) scale(1.05)`;
+});
+
+/* lightbox ảnh + caption */
+const lb = document.getElementById('lb'),
+      lbimg = document.getElementById('lbimg'),
+      caption = document.getElementById('caption');
+function openLightbox(el){
+  lbimg.src = el.src;
+  caption.textContent = el.dataset.caption || "";
+  lb.style.display='flex';
+}
+lb.addEventListener('click', ()=> lb.style.display='none');
+
+/* popup video */
+function showVideo(){
+  const box = document.getElementById('videoBox');
+  const vid = document.getElementById('capcutVideo');
+  box.style.display = 'flex';
+  vid.currentTime = 0;
+  vid.play();
+}
+function closeVideo(){
+  const box = document.getElementById('videoBox');
+  const vid = document.getElementById('capcutVideo');
+  vid.pause();
+  box.style.display = 'none';
+}
+</script>
+</body>
+</html>
